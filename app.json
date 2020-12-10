@@ -1,0 +1,12 @@
+{
+  "name": "event-countdown",
+  "displayName": "event-countdown",
+  "expo": {
+    "name": "event-countdown",
+    "slug": "event-countdown",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
