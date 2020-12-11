@@ -1,0 +1,9 @@
+export const UPDATE_TIME = 'UPDATE_TIME';
+
+export const ADD_EVENT = 'ADD_EVENT';
+export const DELETE_EVENT = 'DELETE_EVENT';
+
+export const PICKER_PICK_YEAR = 'PICKER_PICK_YEAR';
+export const PICKER_PICK_MONTH = 'PICKER_PICK_MONTH';
+export const PICKER_PICK_DAY = 'PICKER_PICK_DAY';
+export const PICKER_PICK_TIME = 'PICKER_PICK_TIME';
