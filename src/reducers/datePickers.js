@@ -1,27 +1,34 @@
-import { YEARS_RANGE } from 'constants/picker';
+import { YEARS_RANGE } from 'constants/datePickers';
 import {
-  PICKER_PICK_YEAR,
-  PICKER_PICK_MONTH,
-  PICKER_PICK_DAY,
-  PICKER_PICK_TIME,
+  DATE_PICKER_SET_DATE_TIME,
+  DATE_PICKER_PICK_YEAR,
+  DATE_PICKER_PICK_MONTH,
+  DATE_PICKER_PICK_DAY,
+  DATE_PICKER_PICK_TIME,
 } from 'constants/actionTypes';
 import { DAYS_IN_MONTHS } from 'constants/daysInMonths';
 
 const currentDate = new Date();
-const years = [];
-for(let i = 0; i <= YEARS_RANGE; i++) {
-  years.push(currentDate.getFullYear() + i);
-}
+
+const getYearsInRange = date => {
+  const years = [];
+  for (let i = 0; i <= YEARS_RANGE; i++) {
+    years.push(date.getFullYear() + i)
+  }
+  return years;
+};
+
+const years = getYearsInRange(currentDate);
 
 const initialState = {
   years,
   yearPosition: 0,
   month: 1,
+  daysInMonth: 31,
   day: 1,
   hour: 0,
   minute: 0,
   second: 0,
-  daysInMonth: 31,
 };
 
 const capitalize = string => {
@@ -46,7 +53,28 @@ const getDaysInMonth = ({ month, year }) =>
 export default (state = initialState, action) => {
   switch (action.type) {
 
-    case PICKER_PICK_YEAR: {
+    case DATE_PICKER_SET_DATE_TIME: {
+      const years = getYearsInRange(action.date);
+      const yearPosition = 0;
+      const month = action.date.getMonth() + 1;
+      const daysInMonth = getDaysInMonth({
+        month,
+        year: years[yearPosition],
+      });
+      return {
+        ...state,
+        years,
+        yearPosition,
+        month,
+        daysInMonth,
+        day: action.date.getDay() + 1,
+        hour: action.date.getHours(),
+        minute: action.date.getMinutes(),
+        second: action.date.getSeconds(),
+      };
+    }
+
+    case DATE_PICKER_PICK_YEAR: {
       const daysInMonth = getDaysInMonth({
         month: state.month,
         year: state.years[action.position],
@@ -59,7 +87,7 @@ export default (state = initialState, action) => {
       };
     }
 
-    case PICKER_PICK_MONTH: {
+    case DATE_PICKER_PICK_MONTH: {
       const daysInMonth = getDaysInMonth({
         month: action.position + 1,
         year: state.years[state.yearPosition],
@@ -72,13 +100,13 @@ export default (state = initialState, action) => {
       };
     }
 
-    case PICKER_PICK_DAY:
+    case DATE_PICKER_PICK_DAY:
       return {
         ...state,
         day: action.position + 1,
       };
 
-    case PICKER_PICK_TIME:
+    case DATE_PICKER_PICK_TIME:
       return {
         ...state,
         [action.unit]: action.position,

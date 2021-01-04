@@ -10,8 +10,8 @@ import getTimeLeft from './getTimeLeft';
 
 const HomeScreen = ({ time, events, navigation }) => {
   const renderItem = ({ item }) => {
-    const { id, title, deadline } = item;
-    const timeLeft = getTimeLeft(deadline, time);
+    const { id, title, date } = item;
+    const timeLeft = getTimeLeft(date, time);
     return (
       <Event
         id={ id }

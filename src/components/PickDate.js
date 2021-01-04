@@ -3,8 +3,8 @@ import { StyleSheet, View } from 'react-native';
 import { WheelPicker } from 'react-native-wheel-picker-android';
 import { connect } from 'react-redux';
 
-import { DAYS, MONTHS } from 'constants/picker';
-import { pickYear, pickMonth, pickDay } from 'actions/picker';
+import { DAYS, MONTHS } from 'constants/datePickers';
+import { pickYear, pickMonth, pickDay } from 'actions/datePickers';
 
 const styles = StyleSheet.create({
   pickersContainer: {
@@ -18,24 +18,23 @@ const styles = StyleSheet.create({
   },
 });
 
-const PickDate = ({ years, yearPosition, month, days, daysInMonth, pickYear, pickMonth, pickDay }) => (
+const PickDate = ({ years, yearPosition, month, day, daysInMonth, pickYear, pickMonth, pickDay }) => (
   <View style={ styles.pickersContainer }>
     <WheelPicker
       isCyclic
       data={ DAYS[daysInMonth] }
-      style={ styles.picker }
-      onItemSelected={ pickDay - 1 }
+      selectedItem={ day - 1 }
+      onItemSelected={ pickDay }
       style={ styles.picker }
     />
     <WheelPicker
       isCyclic
       data={ MONTHS }
-      onSelectedItem={ month - 1 }
+      selectedItem={ month - 1 }
       onItemSelected={ pickMonth }
       style={ styles.picker }
     />
     <WheelPicker
-      isCyclic
       data={ years.map(year => year.toString()) }
       selectedItem={ yearPosition }
       onItemSelected={ pickYear }
@@ -45,7 +44,7 @@ const PickDate = ({ years, yearPosition, month, days, daysInMonth, pickYear, pic
 );
 
 const mapState = state => {
-  const { years, yearPosition, month, day, daysInMonth } = state.picker;
+  const { years, yearPosition, month, day, daysInMonth } = state.datePickers;
   return { years, yearPosition, month, day, daysInMonth };
 };
 

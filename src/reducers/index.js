@@ -2,12 +2,14 @@ import { combineReducers } from 'redux';
 
 import time from './time';
 import events from './events';
-import picker from './picker';
+import datePickers from './datePickers';
+import textInputs from './textInputs';
 
 const rootReducer = combineReducers({
   time,
   events,
-  picker,
+  datePickers,
+  textInputs,
 });
 
 export default rootReducer;
