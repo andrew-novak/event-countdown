@@ -18,8 +18,7 @@ const ButtonAdd = ({ title, years, yearPosition, month, day, hour, minute, secon
     style={ styles.button }
     onPress={ () => addEvent({
       title,
-      year: years[yearPosition], month, day,
-      hour, minute, second
+      dateObj: { year: years[yearPosition], month, day, hour, minute, second },
     }) }
   >
     <Text>Add</Text>

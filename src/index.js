@@ -1,5 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { Fragment, useEffect } from 'react';
+import { Root } from 'native-base';
 import { NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Provider as StoreProvider, connect } from 'react-redux';
@@ -22,33 +23,35 @@ const App = ({ updateTime }) => {
   }, []);
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName='Home'
-        headerMode='float'
-      >
-        <Stack.Screen
-          name='Home'
-          component={ HomeScreen }
-          options={{
-            /*headerStyle: {
-              backgroundColor: '#a41c56',
-            },*/
-            header: props => <Header { ...props } />,
-          }}
-        />
-        <Stack.Screen
-          name='Add'
-          component={ AddScreen }
-          options={{
-            /*headerStyle: {
-              backgroundColor: '#a41c56',
-            },*/
-            header: props => <Header { ...props } />,
-          }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Root>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName='Home'
+          headerMode='float'
+        >
+          <Stack.Screen
+            name='Home'
+            component={ HomeScreen }
+            options={{
+              /*headerStyle: {
+                backgroundColor: '#a41c56',
+              },*/
+              header: props => <Header { ...props } />,
+            }}
+          />
+          <Stack.Screen
+            name='Add'
+            component={ AddScreen }
+            options={{
+              /*headerStyle: {
+                backgroundColor: '#a41c56',
+              },*/
+              header: props => <Header { ...props } />,
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Root>
   );
 }
 
