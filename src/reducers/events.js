@@ -1,44 +1,24 @@
 import {
+  EVENTS_SET,
   EVENT_ADD,
   EVENT_DELETE,
 } from 'constants/actionTypes';
 
-const initialState = [
-  {
-    id: 0,
-    title: 'First event',
-    date: '2020-12-03T22:10:33',
-  },
-  {
-    id: 1,
-    title: 'Second event',
-    date: '2021-03-04T13:44:33',
-  },
-  {
-    id: 2,
-    title: 'Third event',
-    date: '2022-09-23T15:13:39',
-  },
-  {
-    id: 3,
-    title: '4th event',
-    date: '2022-09-23T15:13:39',
-  },
-  {
-    id: 4,
-    title: '5th event',
-    date: '2022-09-23T15:13:39',
-  },
-];
+const initialState = [];
+
+let num = 10;
 
 export default (state = initialState, action) => {
   switch (action.type) {
 
+    case EVENTS_SET:
+      return action.events;
+
     case EVENT_ADD: {
-      console.log('Add Event');
       const { title, date } = action;
       const newState = state;
-      newState.push({ id: 99, title, date });
+      newState.push({ id: num, title, date });
+      num++;
       return newState;
     }
 

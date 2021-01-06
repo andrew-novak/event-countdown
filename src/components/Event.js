@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { Text, Card, CardItem, Button, Icon, Body, ListItem, Left, Right } from 'native-base';
 import { connect } from 'react-redux';
 
-import { deleteEvent } from 'actions/event';
+import { deleteEvent } from 'actions/events';
 
 const styles = StyleSheet.create({
   body: {

@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Button, Text } from 'native-base';
 import { connect } from 'react-redux';
 
-import { addEvent } from 'actions/event';
+import { addEvent } from 'actions/events';
 
 const styles = StyleSheet.create({
   button: {
@@ -12,14 +12,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const ButtonAdd = ({ title, years, yearPosition, month, day, hour, minute, second, addEvent }) => (
+const ButtonAdd = ({ navigation: { navigate }, title, dateObj, addEvent }) => (
   <Button
     block
     style={ styles.button }
-    onPress={ () => addEvent({
-      title,
-      dateObj: { year: years[yearPosition], month, day, hour, minute, second },
-    }) }
+    onPress={ () => addEvent({ title, dateObj, navigate }) }
   >
     <Text>Add</Text>
   </Button>
@@ -28,7 +25,8 @@ const ButtonAdd = ({ title, years, yearPosition, month, day, hour, minute, secon
 const mapState = state => {
   const { newEventTitle: title } = state.textInputs;
   const { years, yearPosition, month, day, hour, minute, second } = state.datePickers;
-  return { title, years, yearPosition, month, day, hour, minute, second };
+  const dateObj = { year: years[yearPosition], month, day, hour, minute, second };
+  return { title, dateObj };
 };
 
 export default connect(

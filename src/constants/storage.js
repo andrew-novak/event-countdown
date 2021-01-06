@@ -1,0 +1,1 @@
+export const STORAGE_KEY_EVENTS = 'STORAGE_KEY_EVENTS';

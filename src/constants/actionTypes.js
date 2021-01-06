@@ -1,5 +1,6 @@
 export const UPDATE_TIME = 'UPDATE_TIME';
 
+export const EVENTS_SET = 'EVENTS_DET';
 export const EVENT_ADD = 'EVENT_ADD';
 export const EVENT_DELETE = 'EVENT_DELETE';
 
@@ -10,3 +11,6 @@ export const DATE_PICKER_PICK_DAY = 'PICKER_PICK_DAY';
 export const DATE_PICKER_PICK_TIME = 'PICKER_PICK_TIME';
 
 export const TEXT_INPUT_CHANGE = 'TEXT_INPUT_CHANGE';
+
+export const SNACKBAR_SHOW = 'SNACKBAR_SHOW';
+export const SNACKBAR_HIDE = 'SNACKBAR_HIDE';

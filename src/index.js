@@ -5,15 +5,20 @@ import { NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Provider as StoreProvider, connect } from 'react-redux';
 
+import { STORAGE_KEY_EVENTS } from 'constants/storage'
 import store from 'store';
 import Header from 'components/Header';
 import HomeScreen from 'screens/HomeScreen';
 import AddScreen from 'screens/AddScreen';
+import { getLocal, storeLocal } from 'storage';
 import updateTime from 'actions/updateTime';
+import { setEvents } from 'actions/events';
 
 const Stack = createStackNavigator();
 
-const App = ({ updateTime }) => {
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const App = ({ events, setEvents, updateTime }) => {
   useEffect(() => {
     const intervalId = setInterval(
       () => updateTime(new Date()),
@@ -21,6 +26,19 @@ const App = ({ updateTime }) => {
     );
     return () => clearInterval(intervalId);
   }, []);
+
+  useEffect(() => {
+    getLocal(STORAGE_KEY_EVENTS)
+      .then(stored => {
+        if (stored) {
+          setEvents(stored)
+        }
+      });
+  }, []);
+
+  useEffect(() => {
+    storeLocal({ key: STORAGE_KEY_EVENTS, value: events });
+  }, [events]);
 
   return (
     <Root>
@@ -55,9 +73,14 @@ const App = ({ updateTime }) => {
   );
 }
 
+const mapState = state => {
+  const { events } = state;
+  return { events };
+};
+
 const ConnectedApp = connect(
-  null,
-  { updateTime },
+  mapState,
+  { setEvents, updateTime },
 )(App);
 
 const StoreWrappedApp = ({ children }) => (
