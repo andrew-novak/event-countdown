@@ -9,6 +9,8 @@ import Header from 'components/Header';
 import Snackbar from 'components/Snackbar';
 import getTimeLeft from './getTimeLeft';
 
+import theme from 'theme';
+
 const HomeScreen = ({ navigation: { navigate }, time, events, snackbar }) => {
   const [ snackOffset, setSnackOffset ] = useState(0);
 
@@ -32,6 +34,8 @@ const HomeScreen = ({ navigation: { navigate }, time, events, snackbar }) => {
         keyExtractor={ (item, index) => item.id.toString() }
       />
       <Fab
+        buttonColor={ theme.color.main.background }
+        iconTextColor={ theme.color.main.text }
         snackOffset={ snackOffset }
         onClickAction={ () => navigate('Add') }
       />

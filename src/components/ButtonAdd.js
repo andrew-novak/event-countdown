@@ -3,12 +3,15 @@ import { StyleSheet } from 'react-native';
 import { Button, Text } from 'native-base';
 import { connect } from 'react-redux';
 
-import { addEvent } from 'actions/events';
+import theme from 'theme';
+import { addEvent } from 'actions/events'
 
 const styles = StyleSheet.create({
   button: {
     marginLeft: 20,
     marginRight: 20,
+    backgroundColor: theme.color.main.background,
+    color: theme.color.main.text,
   },
 });
 

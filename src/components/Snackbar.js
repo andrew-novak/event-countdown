@@ -1,11 +1,13 @@
 import React from 'react';
 import SnackBar from 'react-native-snackbar-component';
 
+import theme from 'theme';
+
 export default ({ visible, variant, message, distanceCallback }) => {
   const bgColors = {
-    success: '#508330',
-    warning: '#bfac2e',
-    danger: '#a72b2b',
+    success: theme.color.snackbar.success,
+    warning: theme.color.snackbar.warning,
+    danger: theme.color.snackbar.danger,
   };
 
   return (
@@ -13,6 +15,7 @@ export default ({ visible, variant, message, distanceCallback }) => {
       visible={ visible }
       textMessage={ message }
       backgroundColor={ bgColors[variant] }
+      messageColor={ theme.color.snackbar.text }
       distanceCallback={ distanceCallback }
     />
   );

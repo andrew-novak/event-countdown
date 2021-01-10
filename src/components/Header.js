@@ -1,4 +1,5 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import {
   Header as NativeBaseHeader,
   Left,
@@ -8,8 +9,22 @@ import {
   Text,
 } from 'native-base';
 
+import theme from 'theme';
+
+const styles = StyleSheet.create({
+  root: {
+    backgroundColor: theme.color.main.background,
+  },
+  text: {
+    color: theme.color.main.text,
+  },
+});
+
 const Header = ({ previous, navigation: { goBack } }) => (
-  <NativeBaseHeader>
+  <NativeBaseHeader
+    style={ styles.root }
+    androidStatusBarColor={ theme.color.main.androidStatusBar }
+  >
     <Left>
       { previous ? (
         <Button transparent onPress={ goBack }>
@@ -18,7 +33,7 @@ const Header = ({ previous, navigation: { goBack } }) => (
       ) : null }
     </Left>
     <Body>
-      <Text>App Name</Text>
+      <Text style={ styles.text }>App Name</Text>
     </Body>
   </NativeBaseHeader>
 );
