@@ -10,15 +10,13 @@ import store from 'store';
 import Header from 'components/Header';
 import HomeScreen from 'screens/HomeScreen';
 import AddScreen from 'screens/AddScreen';
-import { getLocal, storeLocal } from 'storage';
+import { storeLocal } from 'storage';
 import updateTime from 'actions/updateTime';
-import { setEvents } from 'actions/events';
+import { getLocalEvents } from 'actions/events';
 
 const Stack = createStackNavigator();
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
-const App = ({ events, setEvents, updateTime }) => {
+const App = ({ events, getLocalEvents, updateTime }) => {
   useEffect(() => {
     const intervalId = setInterval(
       () => updateTime(new Date()),
@@ -28,17 +26,8 @@ const App = ({ events, setEvents, updateTime }) => {
   }, []);
 
   useEffect(() => {
-    getLocal(STORAGE_KEY_EVENTS)
-      .then(stored => {
-        if (stored) {
-          setEvents(stored)
-        }
-      });
+    getLocalEvents();
   }, []);
-
-  useEffect(() => {
-    storeLocal({ key: STORAGE_KEY_EVENTS, value: events });
-  }, [events]);
 
   return (
     <Root>
@@ -51,9 +40,6 @@ const App = ({ events, setEvents, updateTime }) => {
             name='Home'
             component={ HomeScreen }
             options={{
-              /*headerStyle: {
-                backgroundColor: '#a41c56',
-              },*/
               header: props => <Header { ...props } />,
             }}
           />
@@ -61,9 +47,6 @@ const App = ({ events, setEvents, updateTime }) => {
             name='Add'
             component={ AddScreen }
             options={{
-              /*headerStyle: {
-                backgroundColor: '#a41c56',
-              },*/
               header: props => <Header { ...props } />,
             }}
           />
@@ -80,7 +63,7 @@ const mapState = state => {
 
 const ConnectedApp = connect(
   mapState,
-  { setEvents, updateTime },
+  { getLocalEvents, updateTime },
 )(App);
 
 const StoreWrappedApp = ({ children }) => (

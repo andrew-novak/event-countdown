@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Event = ({ id, title, timeLeft, deleteEvent }) => {
+const Event = ({ id, title, timeLeft, events, deleteEvent }) => {
   const renderTimeUnits = timeLeft.map((unit, index) =>
     <Fragment key={ index }>
       <Text style={ styles.counterNumber }>{ unit.number }</Text>
@@ -44,7 +44,7 @@ const Event = ({ id, title, timeLeft, deleteEvent }) => {
         </View>
       </Body>
       <Right>
-        <Button transparent onPress={ () => deleteEvent(id) }>
+        <Button transparent onPress={ () => deleteEvent({ eventId: id, events }) }>
           <Icon name='trash' style={ styles.deleteIcon } />
         </Button>
       </Right>
@@ -52,7 +52,12 @@ const Event = ({ id, title, timeLeft, deleteEvent }) => {
   );
 };
 
+const mapState = state => {
+  const { events } = state;
+  return { events };
+};
+
 export default connect(
-  null,
+  mapState,
   { deleteEvent },
 )(Event);

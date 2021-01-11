@@ -1,8 +1,6 @@
 export const UPDATE_TIME = 'UPDATE_TIME';
 
 export const EVENTS_SET = 'EVENTS_DET';
-export const EVENT_ADD = 'EVENT_ADD';
-export const EVENT_DELETE = 'EVENT_DELETE';
 
 export const DATE_PICKER_SET_DATE_TIME = 'PICKER_SET_DATE_TIME';
 export const DATE_PICKER_PICK_YEAR = 'PICKER_PICK_YEAR';

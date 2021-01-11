@@ -15,11 +15,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const ButtonAdd = ({ navigation: { navigate }, title, dateObj, addEvent }) => (
+const ButtonAdd = ({ navigation: { navigate }, event, events, addEvent }) => (
   <Button
     block
     style={ styles.button }
-    onPress={ () => addEvent({ title, dateObj, navigate }) }
+    onPress={ () => addEvent({ event, events, navigate }) }
   >
     <Text>Add</Text>
   </Button>
@@ -28,8 +28,9 @@ const ButtonAdd = ({ navigation: { navigate }, title, dateObj, addEvent }) => (
 const mapState = state => {
   const { newEventTitle: title } = state.textInputs;
   const { years, yearPosition, month, day, hour, minute, second } = state.datePickers;
-  const dateObj = { year: years[yearPosition], month, day, hour, minute, second };
-  return { title, dateObj };
+  const date = new Date(years[yearPosition], month - 1, day, hour, minute, second)
+  const { events } = state;
+  return { event: { title, date }, events };
 };
 
 export default connect(
